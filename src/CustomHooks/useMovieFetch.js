@@ -1,5 +1,6 @@
 
 import {useState,useEffect} from 'react'
+import { isPersistedState } from '../helpers'
 
 
 import API from '../API'
@@ -22,7 +23,7 @@ export const useMovieFetch = (movieId) => {
               //get directors
               const directors = credits.crew.filter(member=>member.job==="Director");
     
-              setState({...movie,actors:credits.crew,directors})
+              setState({...movie,actors:credits.crew,directors,credits})
               setLoading(false);
               
               
@@ -32,11 +33,21 @@ export const useMovieFetch = (movieId) => {
             }
            
            };
+
+           const sessionState=isPersistedState(movieId);
+           if(sessionState){
+              setState(sessionState);
+              setLoading(false);
+              return;
+           }
         
-        fetchData()
+        fetchData()  
      },[movieId]) 
 
+useEffect(()=>{
+   sessionStorage.setItem(movieId,JSON.stringify(state));
 
+},[movieId,state])
 
      return {state,loading,error}
    
