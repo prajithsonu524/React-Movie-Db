@@ -28,7 +28,7 @@ return <>
     <BreadCrumb movieTitle={movie.original_title} />
     <MovieInfo movie={movie}/>
     <MovieInfoBar time={movie.runtime} budget={movie.budget} revenue={movie.revenue} />
-    <Grid header='Actors'>
+    <Grid header='Actors List'>
        {movie.credits.cast.map(cast =>(
            <Actors 
            key={cast.credit_id}
