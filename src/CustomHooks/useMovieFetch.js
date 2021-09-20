@@ -6,7 +6,7 @@ import { isPersistedState } from '../helpers'
 import API from '../API'
  
 export const useMovieFetch = (movieId) => {
-    const [state,setState]=useState({})
+    const [state,setState]=useState()
     const [loading,setLoading]=useState(true)
     const [error,setError]=useState(false)
 
